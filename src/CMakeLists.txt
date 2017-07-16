@@ -1,7 +1,7 @@
-set(ModuleTemplate_SRCS
+set(ITKArrayFire_SRCS
   itkMinimalStandardRandomVariateGenerator.cxx
   )
 
-add_library(ModuleTemplate ${ModuleTemplate_SRCS})
+add_library(ITKArrayFire ${ITKArrayFire_SRCS})
 itk_module_link_dependencies()
-itk_module_target(ModuleTemplate)
+itk_module_target(ITKArrayFire)

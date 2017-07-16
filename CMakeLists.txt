@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.9)
-project(ModuleTemplate)
+project(ITKArrayFire)
 
-set(ModuleTemplate_LIBRARIES ModuleTemplate)
+set(ITKArrayFire_LIBRARIES ITKArrayFire)
 
 if(NOT ITK_SOURCE_DIR)
   find_package(ITK REQUIRED)
