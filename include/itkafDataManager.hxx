@@ -84,7 +84,7 @@ DataManager< TBuffer >
 template< typename TBuffer >
 void
 DataManager< TBuffer >
-::SetHostBufferPointer( void* ptr )
+::SetHostBufferPointer( TBuffer* ptr )
 {
   m_HostBuffer = ptr;
 }
@@ -172,7 +172,7 @@ DataManager< TBuffer >
 
 
 template< typename TBuffer >
-void*
+TBuffer*
 DataManager< TBuffer >
 ::GetHostBufferPointer()
 {

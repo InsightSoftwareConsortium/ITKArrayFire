@@ -60,7 +60,7 @@ public:
   void SetArrayDimensions( const ::af::dim4 & dims );
   ::af::dim4 GetArrayDimensions() const;
 
-  void SetHostBufferPointer( void* ptr );
+  void SetHostBufferPointer( TBuffer* ptr );
 
   void SetHostDirtyFlag( bool isDirty );
 
@@ -103,7 +103,7 @@ public:
   ::af::array* GetModifiableArray();
 
   /** Get host buffer pointer */
-  void* GetHostBufferPointer();
+  TBuffer* GetHostBufferPointer();
 
 protected:
 
@@ -118,7 +118,7 @@ protected:
 
   /** buffer pointers */
   ::af::array* m_Array;
-  void*        m_HostBuffer;
+  TBuffer*     m_HostBuffer;
 
   /** checks if buffer needs to be updated */
   bool m_IsArrayDirty;
