@@ -2,11 +2,11 @@ ITKArrayFire
 ============
 
 
-.. image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKITKArrayFire.svg?style=shield
-    :target: https://circleci.com/gh/InsightSoftwareConsortium/ITKITKArrayFire
+.. image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKArrayFire.svg?style=shield
+    :target: https://circleci.com/gh/InsightSoftwareConsortium/ITKArrayFire
 
-.. image:: https://travis-ci.org/InsightSoftwareConsortium/ITKITKArrayFire.svg?branch=master
-    :target: https://travis-ci.org/InsightSoftwareConsortium/ITKITKArrayFire
+.. image:: https://travis-ci.org/InsightSoftwareConsortium/ITKArrayFire.svg?branch=master
+    :target: https://travis-ci.org/InsightSoftwareConsortium/ITKArrayFire
 
 .. image:: https://img.shields.io/appveyor/ci/thewtex/itkmoduletemplate.svg
     :target: https://ci.appveyor.com/project/thewtex/itkmoduletemplate
