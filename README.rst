@@ -1,6 +1,5 @@
 ITKArrayFire
 ============
->>>>>>> d91b5cc... DOC: Update README
 
 
 .. image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKITKArrayFire.svg?style=shield

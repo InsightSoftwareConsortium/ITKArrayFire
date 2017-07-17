@@ -4,7 +4,20 @@ if(NOT ITK_SOURCE_DIR)
 endif()
 project(ITKArrayFire)
 
-set(ITKArrayFire_LIBRARIES ITKArrayFire)
+#set(ITKArrayFire_LIBRARIES ITKArrayFire)
+
+set(ITKArrayFire_SYSTEM_INCLUDE_DIRS ${ArrayFire_INCLUDE_DIRS})
+
+set(ITKArrayFire_EXPORT_CODE_INSTALL "
+set(ArrayFire_DIR \"${ArrayFire_DIR}\")
+find_package(ArrayFire NO_MODULE REQUIRED)
+")
+set(ITKArrayFire_EXPORT_CODE_BUILD "
+if(NOT ITK_BINARY_DIR)
+  set(ArrayFire_DIR \"${ArrayFire_DIR}\")
+  find_package(ArrayFire NO_MODULE REQUIRED)
+endif()
+")
 
 if(NOT ITK_SOURCE_DIR)
   find_package(ITK REQUIRED)
