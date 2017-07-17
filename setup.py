@@ -22,9 +22,8 @@ setup(
     long_description='ITK is an open-source, cross-platform library that '
                      'provides developers with an extensive suite of software '
                      'tools for image analysis. ArrayFire is a high'
-                     'performance software library for parallel computing with
-                     an'
-                     'easy-to-use API. Its array based function set makes'
+                     'performance software library for parallel computing with'
+                     'an easy-to-use API. Its array based function set makes'
                      'parallel programming more accessible.',
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
