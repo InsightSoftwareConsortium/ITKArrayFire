@@ -7,6 +7,11 @@ compiler:
 cache:
   directories:
   - "$HOME/deps"
+before_install:
+- brew install freeimage fftw glfw
+- |
+  wget https://arrayfire.s3.amazonaws.com/3.5.0/ArrayFire-v3.5.0_OSX.pkg
+  sudo installer -pkg ArrayFire-v3.5.0_OSX.pkg -target /
 script:
 - curl -L https://rawgit.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
 - chmod u+x macpython-download-cache-and-build-module-wheels.sh
