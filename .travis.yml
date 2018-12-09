@@ -13,7 +13,7 @@ before_install:
   wget --show-progress --progress=dot https://arrayfire.s3.amazonaws.com/3.5.0/ArrayFire-v3.5.0_OSX.pkg
   sudo installer -pkg ArrayFire-v3.5.0_OSX.pkg -target /
 script:
-- curl -L https://rawgit.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
+- curl -L https://raw.githubusercontent.com/InsightSoftwareConsortium/ITKPythonPackage/master/scripts/macpython-download-cache-and-build-module-wheels.sh -O
 - chmod u+x macpython-download-cache-and-build-module-wheels.sh
 - ./macpython-download-cache-and-build-module-wheels.sh
 - tar -zcvf dist.tar.gz dist/
