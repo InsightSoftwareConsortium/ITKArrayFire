@@ -24,8 +24,7 @@
 #include "itkObject.h"
 #include "itkDataObject.h"
 #include "itkObjectFactory.h"
-#include "itkSimpleFastMutexLock.h"
-#include "itkMutexLockHolder.h"
+#include <mutex>
 
 namespace itk
 {
@@ -47,15 +46,13 @@ template< typename TBuffer >
 class DataManager: public Object
 {
 public:
-  typedef DataManager              Self;
+  using Self = DataManager;
   typedef Object                   Superclass;
   typedef SmartPointer<Self>       Pointer;
   typedef SmartPointer<const Self> ConstPointer;
 
   itkNewMacro(Self);
   itkTypeMacro(DataManager, Object);
-
-  typedef MutexLockHolder<SimpleFastMutexLock> MutexHolderType;
 
   void SetArrayDimensions( const ::af::dim4 & dims );
   ::af::dim4 GetArrayDimensions() const;
@@ -125,7 +122,7 @@ protected:
   bool m_IsHostBufferDirty;
 
   /** Mutex lock to prevent r/w hazard for multithreaded code */
-  SimpleFastMutexLock m_Mutex;
+  std::mutex m_Mutex;
 
 private:
   ITK_DISALLOW_COPY_AND_ASSIGN(DataManager);

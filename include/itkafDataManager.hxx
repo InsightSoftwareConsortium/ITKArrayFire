@@ -133,7 +133,7 @@ void
 DataManager< TBuffer >
 ::UpdateHostBuffer()
 {
-  MutexHolderType holder(m_Mutex);
+  std::lock_guard<std::mutex> holder(this->m_Mutex);
 
   if( m_IsHostBufferDirty && m_Array != ITK_NULLPTR && m_HostBuffer != ITK_NULLPTR )
     {
@@ -150,7 +150,7 @@ void
 DataManager< TBuffer >
 ::UpdateArray()
 {
-  MutexHolderType mutexHolder(m_Mutex);
+  std::lock_guard<std::mutex> holder(this->m_Mutex);
 
   if( m_IsArrayDirty && m_HostBuffer != ITK_NULLPTR && m_Array != ITK_NULLPTR )
     {
