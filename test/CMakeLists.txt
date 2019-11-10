@@ -1,7 +1,7 @@
 itk_module_test()
 
 set(ITKArrayFireTests
-  itkafImageTest.cxx
+  itkAFImageTest.cxx
   )
 
 #CreateTestDriver(ITKArrayFire "${ITKArrayFire-Test_LIBRARIES}" "${ITKArrayFireTests}")

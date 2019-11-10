@@ -15,34 +15,30 @@
 *  limitations under the License.
 *
 *=========================================================================*/
+#ifndef itkAFDataManager_hxx
+#define itkAFDataManager_hxx
 
-#ifndef itkafDataManager_hxx
-#define itkafDataManager_hxx
-
-#include "itkafDataManager.h"
+#include "itkAFDataManager.h"
 
 namespace itk
 {
 
-namespace af
-{
-
 template< typename TBuffer >
-DataManager< TBuffer >
-::DataManager():
+AFDataManager< TBuffer >
+::AFDataManager():
   m_IsArrayDirty( false ),
   m_IsHostBufferDirty( false )
 {
-  m_Array      = ITK_NULLPTR;
-  m_HostBuffer = ITK_NULLPTR;
+  m_Array      = nullptr;
+  m_HostBuffer = nullptr;
 
   this->Initialize();
 }
 
 
 template< typename TBuffer >
-DataManager< TBuffer >
-::~DataManager()
+AFDataManager< TBuffer >
+::~AFDataManager()
 {
   delete m_Array;
 }
@@ -50,7 +46,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetArrayDimensions( const ::af::dim4 & dims )
 {
   if( dims != m_ArrayDimensions )
@@ -63,7 +59,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 ::af::dim4
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::GetArrayDimensions() const
 {
   return this->m_ArrayDimensions;
@@ -72,7 +68,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::Allocate()
 {
   delete m_Array;
@@ -83,7 +79,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetHostBufferPointer( TBuffer* ptr )
 {
   m_HostBuffer = ptr;
@@ -92,7 +88,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetHostDirtyFlag( bool isDirty )
 {
   m_IsHostBufferDirty = isDirty;
@@ -101,7 +97,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetArrayDirtyFlag( bool isDirty )
 {
   m_IsArrayDirty = isDirty;
@@ -110,7 +106,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetArrayDirty()
 {
   this->UpdateHostBuffer();
@@ -120,7 +116,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::SetHostBufferDirty()
 {
   this->UpdateArray();
@@ -130,7 +126,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::UpdateHostBuffer()
 {
   std::lock_guard<std::mutex> holder(this->m_Mutex);
@@ -147,7 +143,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::UpdateArray()
 {
   std::lock_guard<std::mutex> holder(this->m_Mutex);
@@ -163,7 +159,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 ::af::array *
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::GetModifiableArray()
 {
   SetHostBufferDirty();
@@ -173,7 +169,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 TBuffer*
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::GetHostBufferPointer()
 {
   SetArrayDirty();
@@ -183,7 +179,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 bool
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::Update()
 {
   if( m_IsArrayDirty && m_IsHostBufferDirty )
@@ -202,8 +198,8 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
-::Graft(DataManager* data)
+AFDataManager< TBuffer >
+::Graft(AFDataManager* data)
 {
   if( data )
     {
@@ -221,7 +217,7 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::Initialize()
 {
   for( unsigned int dim = 0; dim < 4; ++dim )
@@ -237,10 +233,10 @@ DataManager< TBuffer >
 
 template< typename TBuffer >
 void
-DataManager< TBuffer >
+AFDataManager< TBuffer >
 ::PrintSelf(std::ostream & os, Indent indent) const
 {
-  os << indent << "DataManager (" << this << ")" << std::endl;
+  os << indent << "AFDataManager (" << this << ")" << std::endl;
   for( unsigned int dim = 0; dim < 4; ++dim )
     {
     os << indent << "m_ArrayDimensions[" << dim << "]: " << m_ArrayDimensions[dim] << std::endl;
@@ -251,7 +247,6 @@ DataManager< TBuffer >
   os << indent << "m_HostBuffer: " << m_HostBuffer << std::endl;
 }
 
-} // namespace af
 } // namespace itk
 
 #endif
