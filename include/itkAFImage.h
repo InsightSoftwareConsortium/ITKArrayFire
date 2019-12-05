@@ -16,8 +16,8 @@
 *
 *=========================================================================*/
 
-#ifndef itkafImage_h
-#define itkafImage_h
+#ifndef itkAFImage_h
+#define itkAFImage_h
 
 //#include "itkImage.h"
 //#include "itkafImageDataManager.h"

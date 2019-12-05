@@ -15,47 +15,41 @@
 *  limitations under the License.
 *
 *=========================================================================*/
-
-#ifndef itkafDataManager_h
-#define itkafDataManager_h
+#ifndef itkAFDataManager_h
+#define itkAFDataManager_h
 
 #include "arrayfire.h"
 
 #include "itkObject.h"
 #include "itkDataObject.h"
 #include "itkObjectFactory.h"
-#include "itkSimpleFastMutexLock.h"
-#include "itkMutexLockHolder.h"
+#include <mutex>
 
 namespace itk
 {
-namespace af
-{
 
-/** \class DataManager
- * \brief Memory manager implemented for ArrayFire. Required by itk::af::Image class.
+/** \class AFDataManager
+ * \brief Memory manager implemented for ArrayFire. Required by itk::AFImage class.
  *
- * This class serves as a base class for GPU data container for itk::af::Image class,
+ * This class serves as a base class for GPU data container for itk::AFImage class,
  * which is similar to ImageBase class for Image class. However, all the image-related
  * meta data will be already stored in image class (parent of af::Image), therefore
- * we did not name it af::ImageBase. Rather, this class is a GPU-specific data manager
+ * we did not name it AFImageBase. Rather, this class is a GPU-specific data manager
  * that provides functionalties for CPU-GPU data synchronization and grafting GPU data.
  *
  * \ingroup ITKArrayFire
  */
 template< typename TBuffer >
-class DataManager: public Object
+class AFDataManager: public Object
 {
 public:
-  typedef DataManager              Self;
-  typedef Object                   Superclass;
-  typedef SmartPointer<Self>       Pointer;
-  typedef SmartPointer<const Self> ConstPointer;
+  using Self = AFDataManager;
+  using Superclass = Object;
+  using Pointer = SmartPointer<Self>;
+  using ConstPointer = SmartPointer<const Self>;
 
   itkNewMacro(Self);
-  itkTypeMacro(DataManager, Object);
-
-  typedef MutexLockHolder<SimpleFastMutexLock> MutexHolderType;
+  itkTypeMacro(AFDataManager, Object);
 
   void SetArrayDimensions( const ::af::dim4 & dims );
   ::af::dim4 GetArrayDimensions() const;
@@ -93,10 +87,10 @@ public:
   /** Synchronize host and af::array buffers (using dirty flags) */
   bool Update();
 
-  /** Method for grafting the content of one DataManager into another one */
-  virtual void Graft(DataManager* data);
+  /** Method for grafting the content of one AFDataManager into another one */
+  virtual void Graft(AFDataManager* data);
 
-  /** Initialize DataManager */
+  /** Initialize AFDataManager */
   virtual void Initialize();
 
   /** Get af::array */
@@ -107,8 +101,8 @@ public:
 
 protected:
 
-  DataManager();
-  virtual ~DataManager();
+  AFDataManager();
+  virtual ~AFDataManager();
   virtual void PrintSelf(std::ostream & os, Indent indent) const ITK_OVERRIDE;
 
 protected:
@@ -125,17 +119,16 @@ protected:
   bool m_IsHostBufferDirty;
 
   /** Mutex lock to prevent r/w hazard for multithreaded code */
-  SimpleFastMutexLock m_Mutex;
+  std::mutex m_Mutex;
 
 private:
-  ITK_DISALLOW_COPY_AND_ASSIGN(DataManager);
+  ITK_DISALLOW_COPY_AND_ASSIGN(AFDataManager);
 };
 
-} // namespace af
 } // namespace itk
 
 #ifndef ITK_MANUAL_INSTANTIATION
-#include "itkafDataManager.hxx"
+#include "itkAFDataManager.hxx"
 #endif
 
 #endif
